@@ -33,10 +33,10 @@ public class EnemyBase : MonoBehaviour
     {
         enemyAINavMeshAgent = GetComponent<NavMeshAgent>();
     }
-    [HideInInspector] public void TakeDamage(float health)
+    [HideInInspector] public void TakeDamage(float objectHealth)
     { 
-        // decreases health by damage amount
-        if (health <= 0) // if enemy is dead, destroy object
+        // decreases object's health by damage amount
+        if (objectHealth <= 0) // if enemy is dead, destroy object
         {
             Destroy(gameObject);
         }
