@@ -53,12 +53,10 @@ namespace Magic.SpellTypes.Fireball
             if (other.CompareTag("Player"))
             {
                 // Handle player collision
-                PlayerMovement playerMovement = other.GetComponentInParent<PlayerMovement>();
-                if (playerMovement != null)
-                {
-                    playerMovement.playerHealth -= FireballSpell.damage;
-                    playerMovement.TakeDamageFromEnemy();
-                }
+                var playerMovement = other.GetComponentInParent<PlayerMovement>();
+                if (playerMovement == null) return;
+                playerMovement.playerHealth -= FireballSpell.damage;
+                playerMovement.TakeDamageFromEnemy();
                 return;
             }
             
