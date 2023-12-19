@@ -7,14 +7,14 @@ public class Caster : EnemyBase
 {
     [SerializeField] public float backUpDistance;
     private NavMeshAgent _casterAI;
-    private EnemySpellController _spellController;
+    private EnemySpellController _spellController; // Code by Mystievous
 
     [SerializeField] public GameObject casterEnemy;
     
     protected override void EnemyAI()
     {
         _casterAI = GetComponent<NavMeshAgent>();
-        _spellController = GetComponent<EnemySpellController>();
+        _spellController = GetComponent<EnemySpellController>();  // Code by Mystievous
     }
     void Start()
     {
@@ -26,17 +26,22 @@ public class Caster : EnemyBase
     
     void Update()
     {
+        // Section of code by Mystievous
         Vector3 casterPos = transform.position;
         Vector3 targetPos = target.position;
-        Vector3 flatTargetPos = new Vector3(targetPos.x, casterPos.y, targetPos.z);
+        Vector3 flatTargetPos = new Vector3(targetPos.x, casterPos.y, targetPos.z); 
         
         distanceToTarget = Vector3.Distance(flatTargetPos, casterPos);
+        // End section of code by Mystievous
+        
         // If distance to player is w/i chase range, spells are turned on
         // If Caster enemy is not at target distance, approaches player until it is
         // Else, Caster enemy is too close to Player and backs up
         if (distanceToTarget <= chaseRange)
         {
             _spellController.isActive = true; // spells are turned on
+            
+            // Section of code by Mystievous
             if (distanceToTarget >= backUpDistance)
             {
                 _casterAI.SetDestination(target.position);
@@ -51,6 +56,7 @@ public class Caster : EnemyBase
                 _casterAI.SetDestination(backupPos);
                 _casterAI.stoppingDistance = 0;
             }
+            // End section of code by Mystievous
         }
         else
         {
